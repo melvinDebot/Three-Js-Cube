@@ -1,0 +1,11 @@
+{
+	"metadata": {
+		"version": 4.5,
+		"type": "BufferGeometry",
+		"generator": "BufferGeometry.toJSON"
+	},
+	"uuid": "40E992D8-B29E-4B7C-9524-EE71DC9782B7",
+	"type": "OctahedronBufferGeometry",
+	"radius": 1,
+	"detail": 0
+}

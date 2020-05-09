@@ -10,8 +10,8 @@
 	</head>
 	<body>
     <script src="js/three.js"></script>
-    <script src="js/Three.min.js"></script>
     <script src="js/OrbitControls.js"></script>
+
 
 
 
@@ -32,25 +32,46 @@
         camera.updateProjectionMatrix()
       });
 
-      var controls = new OrbitControls( camera, renderer.domElement );
+      var controls = new THREE.OrbitControls( camera, renderer.domElement );
       controls.update();
 
 
 
       //Create shape
-      let geometry = new THREE.BoxGeometry(1,1,1);
+      // let geometry = new THREE.BoxGeometry(1,1,1);
+      // let cubeMaterial = [
+      //   new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('img/logo.PNG'), side : THREE.DoubleSide}), //RIGHT SIDE
+      //   new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('img/logo-2.PNG'), side : THREE.DoubleSide}), // LEFT
+      //   new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/logo.PNG'), side : THREE.DoubleSide}),
+      //   new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('img/logo-2.PNG'), side : THREE.DoubleSide}), 
+      //   new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/logo.PNG'), side : THREE.DoubleSide}),
+      //   new THREE.MeshBasicMaterial({ color : 0xCCCCC, side : THREE.DoubleSide}),
+      // ]
+
+      // DONUTS SHAPE
+      let geometrie = new THREE.TorusBufferGeometry( 10, 3, 16, 100 );
+      let donutMaterial = new THREE.MeshLambertMaterial({map : new THREE.TextureLoader().load('img/texture-donuts.jpg'), side : THREE.FrontSide})
 
       // Create material, color
-      let material = new THREE.MeshBasicMaterial({ color : 0xFFFFFF, wireframe : true});
-      let cube = new THREE.Mesh(geometry, material)
+      let material = new THREE.MeshFaceMaterial( donutMaterial );
+      
+      // THREE.MeshBasicMaterial({ color : 0xFFFFFF, wireframe : true});
+      let donuts = new THREE.Mesh(geometrie, material)
 
-      scene.add(cube);
+      scene.add(donuts);
 
-      camera.position.z = 3
+      camera.position.z = 28
+
+      // var light = new THREE.AmbientLight( 0xFFFFFF, 8.0 ); // soft white light
+      // scene.add( light );
+
+      var light = new THREE.PointLight( 0xFFFFFF, 6, 100 );
+      light.position.set( 50, 50, 50 );
+      scene.add( light );
 
       let update = function(){
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.005;
+         donuts.rotation.x += 0.01;
+        donuts.rotation.y += 0.005;
       };
 
       //draw Scene
